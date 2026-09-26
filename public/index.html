@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>needscientist</title><link rel="stylesheet" href="/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/js/config.js"></script></head>
+<body><header><b>need<span>scientist</span></b><nav>
+<button onclick="tab('discover')">가설 탐색</button><button onclick="tab('write')">가설 올리기</button>
+<button onclick="tab('rank')">랭킹</button><a id="admin" href="/admin.html" hidden>관리자</a><button id="auth">로그인</button></nav></header>
+<main><section class="hero"><small>SCIENCE × COMMUNITY</small><h1>가설을 세우고,<br>실험으로 증명하세요.</h1>
+<p>누구나 과학 가설을 공유하고 실험 결과를 함께 검증할 수 있습니다.</p></section>
+<section id="discover" class="view"><input id="search" placeholder="가설 검색"><div id="list" class="grid"></div></section>
+<section id="write" class="view" hidden><div class="panel"><h2>새 가설</h2><form id="hypForm">
+<input id="title" placeholder="가설 제목" required><select id="field"><option>물리</option><option>화학</option><option>생명과학</option><option>지구과학</option><option>천문</option></select>
+<textarea id="body" placeholder="가설 내용" required></textarea><textarea id="method" placeholder="실험 방법" required></textarea>
+<button>가설 등록 (+10P)</button></form></div></section>
+<section id="rank" class="view" hidden><div class="panel"><h2>🏆 Scientist Points</h2><div id="ranking"></div></div></section></main>
+<dialog id="login"><form method="dialog"><button class="x">×</button></form><h2>회원가입 / 로그인</h2>
+<input id="email" type="email" placeholder="이메일"><input id="password" type="password" placeholder="비밀번호"><input id="username" placeholder="닉네임">
+<div class="actions"><button onclick="signup()">회원가입</button><button onclick="signin()">로그인</button></div><p id="msg"></p></dialog>
+<dialog id="detail"></dialog><script src="/js/app.js"></script></body></html>
