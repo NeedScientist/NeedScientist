@@ -1,19 +1,417 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>needscientist</title><link rel="stylesheet" href="/style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/js/config.js"></script></head>
-<body><header><b>need<span>scientist</span></b><nav>
-<button onclick="tab('discover')">가설 탐색</button><button onclick="tab('write')">가설 올리기</button>
-<button onclick="tab('rank')">랭킹</button><a id="admin" href="/admin.html" hidden>관리자</a><button id="auth">로그인</button></nav></header>
-<main><section class="hero"><small>SCIENCE × COMMUNITY</small><h1>가설을 세우고,<br>실험으로 증명하세요.</h1>
-<p>누구나 과학 가설을 공유하고 실험 결과를 함께 검증할 수 있습니다.</p></section>
-<section id="discover" class="view"><input id="search" placeholder="가설 검색"><div id="list" class="grid"></div></section>
-<section id="write" class="view" hidden><div class="panel"><h2>새 가설</h2><form id="hypForm">
-<input id="title" placeholder="가설 제목" required><select id="field"><option>물리</option><option>화학</option><option>생명과학</option><option>지구과학</option><option>천문</option></select>
-<textarea id="body" placeholder="가설 내용" required></textarea><textarea id="method" placeholder="실험 방법" required></textarea>
-<button>가설 등록 (+10P)</button></form></div></section>
-<section id="rank" class="view" hidden><div class="panel"><h2>🏆 Scientist Points</h2><div id="ranking"></div></div></section></main>
-<dialog id="login"><form method="dialog"><button class="x">×</button></form><h2>회원가입 / 로그인</h2>
-<input id="email" type="email" placeholder="이메일"><input id="password" type="password" placeholder="비밀번호"><input id="username" placeholder="닉네임">
-<div class="actions"><button onclick="signup()">회원가입</button><button onclick="signin()">로그인</button></div><p id="msg"></p></dialog>
-<dialog id="detail"></dialog><script src="/js/app.js"></script></body></html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NeedScientist | 과학 가설 실험 커뮤니티</title>
+
+  <meta name="description"
+        content="NeedScientist는 누구나 과학 가설을 공유하고 직접 실험하여 함께 검증하는 과학 커뮤니티입니다. needscientist, needscietnist">
+
+  <meta name="keywords"
+        content="NeedScientist, needscientist, needscietnist, 과학, 과학실험, 과학가설, 실험, 과학커뮤니티">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical"
+        href="https://needscientist.github.io/NeedScientist/">
+
+  <meta property="og:title" content="NeedScientist">
+  <meta property="og:description"
+        content="궁금증을 가설로, 가설을 실험으로.">
+  <meta property="og:type" content="website">
+  <meta property="og:url"
+        content="https://needscientist.github.io/NeedScientist/">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/config.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <a class="brand" href="./">
+    <span class="brand-icon">N</span>
+
+    <span class="brand-name">
+      Need<span>Scientist</span>
+    </span>
+  </a>
+
+  <nav class="nav">
+
+    <button onclick="tab('discover')">
+      가설 탐색
+    </button>
+
+    <button onclick="tab('write')">
+      가설 올리기
+    </button>
+
+    <button onclick="tab('rank')">
+      랭킹
+    </button>
+
+    <a id="admin"
+       href="./admin.html"
+       hidden>
+      관리자
+    </a>
+
+    <button id="auth" class="login-btn">
+      로그인
+    </button>
+
+  </nav>
+
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-text">
+
+      <span class="eyebrow">
+        SCIENCE × COMMUNITY
+      </span>
+
+      <h1>
+        궁금증을 가설로,<br>
+        <span>가설을 실험으로.</span>
+      </h1>
+
+      <p class="hero-description">
+        누구나 과학적 아이디어를 공유하고,
+        직접 실험하고,
+        함께 검증할 수 있습니다.
+      </p>
+
+      <p class="ai-notice">
+        ✦ NeedScientist의 웹사이트와 콘텐츠는
+        모두 AI를 활용해 제작되었습니다.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button class="primary"
+                onclick="tab('write')">
+          가설 올리기
+        </button>
+
+        <button class="secondary"
+                onclick="tab('discover')">
+          가설 탐색하기
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="science-card">
+
+      <div class="science-card-title">
+        HOW IT WORKS
+      </div>
+
+      <div class="step">
+        <strong>01</strong>
+        <div>
+          <b>가설을 제안하세요</b>
+          <span>궁금한 과학적 아이디어를 공유합니다.</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <strong>02</strong>
+        <div>
+          <b>직접 실험하세요</b>
+          <span>실험을 진행하고 결과를 기록합니다.</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <strong>03</strong>
+        <div>
+          <b>함께 검증하세요</b>
+          <span>실험 결과를 공유하고 검증합니다.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DISCOVER -->
+
+  <section id="discover"
+           class="view content-section">
+
+    <div class="section-header">
+
+      <div>
+        <span class="section-label">
+          DISCOVER
+        </span>
+
+        <h2>
+          새로운 가설을 탐색하세요
+        </h2>
+
+        <p>
+          다른 사람들이 생각한 과학적 아이디어를
+          발견하고 직접 실험해 보세요.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <span class="search-icon">⌕</span>
+
+      <input
+        id="search"
+        type="search"
+        placeholder="가설 제목이나 내용을 검색하세요"
+        autocomplete="off">
+
+    </div>
+
+
+    <div id="list"
+         class="grid">
+    </div>
+
+  </section>
+
+
+  <!-- WRITE -->
+
+  <section id="write"
+           class="view content-section"
+           hidden>
+
+    <div class="panel form-panel">
+
+      <span class="section-label">
+        CREATE
+      </span>
+
+      <h2>
+        새로운 가설
+      </h2>
+
+      <p class="muted">
+        다른 사람도 실험할 수 있도록
+        가설과 실험 방법을 구체적으로 작성해 주세요.
+      </p>
+
+
+      <form id="hypForm">
+
+        <label>
+          가설 제목
+
+          <input
+            id="title"
+            placeholder="예: 빛의 색은 식물의 성장 속도에 영향을 줄 것이다"
+            required>
+        </label>
+
+
+        <label>
+          과학 분야
+
+          <select id="field">
+
+            <option>물리</option>
+            <option>화학</option>
+            <option>생명과학</option>
+            <option>지구과학</option>
+            <option>천문</option>
+
+          </select>
+        </label>
+
+
+        <label>
+          가설 내용
+
+          <textarea
+            id="body"
+            placeholder="어떤 결과가 나올 것으로 예상하는지 설명해 주세요."
+            required></textarea>
+
+        </label>
+
+
+        <label>
+          실험 방법
+
+          <textarea
+            id="method"
+            placeholder="다른 사람도 따라 할 수 있도록 실험 방법을 작성해 주세요."
+            required></textarea>
+
+        </label>
+
+
+        <button class="primary submit-button">
+          가설 등록 · +10P
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- RANKING -->
+
+  <section id="rank"
+           class="view content-section"
+           hidden>
+
+    <div class="panel">
+
+      <span class="section-label">
+        RANKING
+      </span>
+
+      <h2>
+        Scientist Points
+      </h2>
+
+      <p class="muted">
+        가설을 공유하고 검증된 실험을 제출해
+        Scientist Point를 모아보세요.
+      </p>
+
+      <div id="ranking">
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- LOGIN -->
+
+<dialog id="login"
+        class="modal">
+
+  <form method="dialog">
+
+    <button class="close-button"
+            aria-label="닫기">
+      ×
+    </button>
+
+  </form>
+
+
+  <div class="modal-title">
+
+    <span class="section-label">
+      ACCOUNT
+    </span>
+
+    <h2>
+      NeedScientist 시작하기
+    </h2>
+
+    <p>
+      회원가입하거나 기존 계정으로 로그인하세요.
+    </p>
+
+  </div>
+
+
+  <label>
+    이메일
+
+    <input
+      id="email"
+      type="email"
+      placeholder="you@example.com">
+  </label>
+
+
+  <label>
+    비밀번호
+
+    <input
+      id="password"
+      type="password"
+      placeholder="비밀번호">
+  </label>
+
+
+  <label>
+    닉네임
+
+    <input
+      id="username"
+      placeholder="닉네임">
+  </label>
+
+
+  <div class="actions">
+
+    <button class="secondary"
+            onclick="signup()">
+      회원가입
+    </button>
+
+    <button class="primary"
+            onclick="signin()">
+      로그인
+    </button>
+
+  </div>
+
+
+  <p id="msg"></p>
+
+</dialog>
+
+
+<!-- HYPOTHESIS DETAIL -->
+
+<dialog id="detail"
+        class="modal detail-modal">
+</dialog>
+
+
+<footer class="footer">
+
+  <div>
+    <strong>NeedScientist</strong>
+    <span>Ideas become experiments.</span>
+  </div>
+
+  <small>
+    Built with AI · Science × Community
+  </small>
+
+</footer>
+
+
+<script src="./js/app.js"></script>
+
+</body>
+</html>
