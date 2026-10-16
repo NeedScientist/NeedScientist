@@ -10,3 +10,32 @@ async function submitProof(e,id){e.preventDefault();let f=$("#photo").files[0],u
 $("#hypForm").onsubmit=async e=>{e.preventDefault();if(!user)return $("#login").showModal();let {error}=await sb.from("hypotheses").insert({user_id:user.id,title:$("#title").value,field:$("#field").value,body:$("#body").value,method:$("#method").value});if(error)return alert(error.message);alert("가설 등록 완료! +10P");e.target.reset();tab("discover")}
 async function loadRank(){let {data}=await sb.from("profiles").select("username,points").order("points",{ascending:false}).limit(50);$("#ranking").innerHTML=(data||[]).map((x,i)=>`<div class=rank><b>${i+1}</b><span>${esc(x.username)}</span><strong>${x.points}P</strong></div>`).join("")}
 $("#search").oninput=load;(async()=>{let {data}=await sb.auth.getSession();user=data.session?.user||null;if(user)update();load()})();
+
+async function changePassword() {
+  const { data: { session }, error: sessionError } =
+    await sb.auth.getSession();
+
+  if (sessionError || !session) {
+    alert("인증 세션이 없습니다. 비밀번호 재설정 이메일을 다시 열어주세요.");
+    return;
+  }
+
+  const newPassword = prompt("새 비밀번호를 입력하세요. (8자 이상)");
+
+  if (newPassword === null) return;
+
+  if (newPassword.length < 8) {
+    alert("비밀번호는 8자 이상이어야 합니다.");
+    return;
+  }
+
+  const { error } = await sb.auth.updateUser({
+    password: newPassword
+  });
+
+  if (error) {
+    alert("비밀번호 변경 실패: " + error.message);
+  } else {
+    alert("비밀번호가 변경되었습니다!");
+  }
+}
