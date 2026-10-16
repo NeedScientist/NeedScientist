@@ -1,12 +1,16 @@
-# needscientist
+# NeedScientist
 
-Vercel + Supabase 배포용 프로젝트입니다.
+NeedScientist는 누구나 과학 가설을 제안하고, 실험 결과를 공유하며, 함께 탐구할 수 있는 과학 커뮤니티입니다.
 
-1. Supabase 프로젝트 생성
-2. `supabase/schema.sql` 전체를 SQL Editor에서 실행
-3. `public/js/config.js`에 Project URL과 anon public key 입력
-4. GitHub에 이 폴더의 전체 내용을 업로드
-5. Vercel에서 GitHub 저장소를 Import
-6. 관리자 지정: `update public.profiles set role='admin' where id='회원 UUID';`
+## 공식 웹사이트
 
-주의: service_role key는 웹 코드에 넣지 마세요.
+https://needscientist.github.io/NeedScientist/
+
+## 주요 기능
+
+- 과학 가설 작성 및 공유
+- 실험 결과 공유
+- 포인트 및 랭킹
+- 과학 커뮤니티 활동
+
+NeedScientist | Science Hypothesis & Experiment Community
