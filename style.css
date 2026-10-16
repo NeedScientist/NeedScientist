@@ -850,3 +850,21 @@ dialog::backdrop {
   }
 
 }
+.hero-buttons .primary {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  border: 1px solid #2563eb !important;
+  min-width: 140px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.hero-buttons .secondary {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+}
