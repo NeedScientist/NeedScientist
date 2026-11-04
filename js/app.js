@@ -3,6 +3,7 @@ const sb = supabase.createClient(NEEDSCIENTIST_SUPABASE_URL, NEEDSCIENTIST_SUPAB
 let user = null;
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+
 function tab(id) {
   for (const name of ['discover', 'write', 'rank']) {
     const section = $('#' + name);
@@ -16,10 +17,8 @@ function tab(id) {
   }
 
   if (id === 'rank') loadRank();
-}
-  if (id === 'rank') loadRank();
-}
 
+ 
 async function signup() {
   const email = $('#email')?.value.trim();
   const password = $('#password')?.value;
