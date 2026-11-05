@@ -175,6 +175,12 @@ async function changePassword() {
 }
 
 function initNeedScientist() {
+  const searchBox = $('#search');
+  if (searchBox) {
+    searchBox.value = '';
+    searchBox.setAttribute('autocomplete', 'off');
+  }
+
   $('#auth')?.addEventListener('click', async () => {
     if (user) {
       const {error} = await sb.auth.signOut();
