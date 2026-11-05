@@ -5,12 +5,19 @@ const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 let latestLoad = 0;
 
+
 function tab(id) {
   for (const name of ['discover', 'write', 'rank']) {
     const section = $('#' + name);
     if (section) section.hidden = name !== id;
   }
-  if (id === 'discover') load();
+
+  if (id === 'discover') {
+    const search = $('#search');
+    if (search) search.value = '';
+    load();
+  }
+
   if (id === 'rank') loadRank();
 }
 
