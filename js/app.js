@@ -53,9 +53,17 @@ async function load() {
   const current = ++latestLoad;
   const list = $('#list');
   if (!list) return;
-  const q = ($('#search')?.value || '').trim();
-  let request = sb.from('hypotheses').select('*').order('created_at', {ascending:false});
-  if (q) request = request.ilike('title', `%${q.replace(/[%_,]/g, '\\$&')}%`);
+  
+const search = $('#search');
+const q = search ? search.value.trim() : '';
+
+let request = sb.from('hypotheses')
+  .select('*')
+  .order('created_at', { ascending: false });
+
+if (q !== '') {
+  request = request.ilike('title', `%${q}%`);
+}
   const {data, error} = await request;
   if (current !== latestLoad) return; // 오래된 검색 결과가 새 결과를 덮지 않도록 방지
   if (error) {
